@@ -3,7 +3,10 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('doli', ['ionic'])
+
+var db = null;
+
+angular.module('doli', ['ionic', 'ngCordova'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -18,7 +21,7 @@ angular.module('doli', ['ionic'])
 
 })
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaSQLite) {
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -26,6 +29,10 @@ angular.module('doli', ['ionic'])
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+    db = $cordovaSQLite.openDB("doli.db");
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS tasks (id integer primary key, title text)");
+
   });
 })
 
