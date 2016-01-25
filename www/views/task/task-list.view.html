@@ -8,7 +8,7 @@
 
       <div class="item item-button-right" ng-repeat="task in tasks">
         {{task.title}}
-        <button class="button button-assertive" ng-click="delete(task)">
+        <button class="button button-assertive" ng-click="confirmDelete(task)">
           <i class="icon ion-close-circled"></i>
         </button>
       </div>
@@ -17,3 +17,20 @@
 
   </ion-content>
 </ion-view>
+
+<script id="task-delete-confirm.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Are You Sure?</h1>
+    </ion-header-bar>
+    <ion-content>
+      <button class="button button-light" ng-click="closeModal()">
+        Cancel
+        <i class="icon ion-close-circled"></i>
+      </button>
+      <button class="button button-assertive" ng-click="delete()">
+        <i class="icon ion-close-circled"></i>
+      </button>
+    </ion-content>
+  </ion-modal-view>
+</script>

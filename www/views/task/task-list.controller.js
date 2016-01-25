@@ -1,5 +1,27 @@
 angular.module('doli')
-  .controller('TaskListController', function($scope, $ionicPlatform, $cordovaSQLite, Task) {
+  .controller('TaskListController', function($scope, $ionicPlatform, $cordovaSQLite, Task, $ionicModal) {
+
+    $scope.selectedTask = {};
+
+    $ionicModal.fromTemplateUrl('task-delete-confirm.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+
+    $scope.openModal = function() {
+      $scope.modal.show();
+    };
+
+    $scope.closeModal = function() {
+      $scope.modal.hide();
+    };
+
+    //Cleanup the modal when we're done with it!
+    $scope.$on('$destroy', function() {
+      $scope.modal.remove();
+    });
 
     $scope.tasks = [{
       title: 'Task 1'
@@ -35,9 +57,15 @@ angular.module('doli')
       $scope.selectAll();
     }
 
-    $scope.delete = function(task) {
-      Task.remove(task);
+    $scope.confirmDelete = function(task) {
+      $scope.selectedTask = task;
+      $scope.openModal();
+    }
+
+    $scope.delete = function() {
+      Task.remove($scope.selectedTask);
       $scope.selectAll();
+      $scope.closeModal();
     }
 
     $ionicPlatform.ready(function() {
