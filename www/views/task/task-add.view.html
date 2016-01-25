@@ -1,0 +1,17 @@
+<ion-view hide-back-button="false" view-title="DOLI - Add Task">
+  <ion-nav-buttons side="right">
+    <button class="button icon ion-plus-circled"></button>
+  </ion-nav-buttons>
+  <ion-content>
+    <form ng-submit="create()">
+      <div class="list">
+        <label class="item item-input">
+          <input ng-model="task.title" placeholder="Title" type="text">
+        </label>
+      </div>
+      <div class="padding">
+        <button class="button button-block button-positive" type="submit">Create</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

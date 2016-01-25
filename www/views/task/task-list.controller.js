@@ -78,4 +78,12 @@ angular.module('doli')
 
     });
 
+    $scope.$on('$ionicView.beforeEnter', function() {
+
+      Task.all().then(function(tasks) {
+        $scope.tasks = tasks;
+      });
+
+    });
+
   });
