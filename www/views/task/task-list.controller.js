@@ -1,5 +1,5 @@
 angular.module('doli')
-  .controller('TaskListController', function($scope, $state, $ionicPlatform, $cordovaSQLite, Task, $ionicModal) {
+  .controller('TaskListController', function($scope, $state, $ionicPlatform, $cordovaSQLite, Task, $ionicModal, $ionicActionSheet) {
 
     $scope.selectedTask = {};
 
@@ -23,17 +23,30 @@ angular.module('doli')
       $scope.modal.remove();
     });
 
-    $scope.tasks = [{
-      title: 'Task 1'
-    }, {
-      title: 'Task 2'
-    }, {
-      title: 'Task 3'
-    }];
+    $scope.tasks = [];
 
-    $scope.onTap = function(task){
+    $scope.onHold = function(task) {
 
-      $state.transitionTo('');
+      $ionicActionSheet.show({
+        titleText: task.title,
+        buttons: [{
+          text: '<i class="icon ion-edit"></i> Edit'
+        }, ],
+        destructiveText: '<i class="icon ion-trash-b"></i> Delete',
+        cancelText: 'Cancel',
+        cancel: function() {
+          // console.log('CANCELLED');
+        },
+        buttonClicked: function(index) {
+          // console.log('BUTTON CLICKED '+index, index);
+          return true;
+        },
+        destructiveButtonClicked: function() {
+          $scope.confirmDelete(task);
+          return true;
+        }
+      });
+
 
     }
 

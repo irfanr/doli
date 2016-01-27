@@ -6,7 +6,7 @@
 
     <div class="list">
 
-      <div class="item item-button-right" ng-repeat="task in tasks" ui-sref="task-view({taskId:task.id})">
+      <div class="item item-button-right" ng-repeat="task in tasks" ui-sref="task-view({taskId:task.id})" on-hold="onHold(task)">
         {{task.title}}
       </div>
 
