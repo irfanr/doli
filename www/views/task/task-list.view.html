@@ -6,7 +6,7 @@
 
     <div class="list">
 
-      <div class="item item-button-right" ng-repeat="task in tasks" ui-sref="task-view({taskId:task.id})" on-hold="onHold(task)">
+      <div class="item item-button-right" ng-repeat="task in tasks" on-hold="onHold(task)" ui-sref="task-view({taskId:task.id})">
         {{task.title}}
       </div>
 
@@ -18,16 +18,25 @@
 <script id="task-delete-confirm.html" type="text/ng-template">
   <ion-modal-view>
     <ion-header-bar>
-      <h1 class="title">Are You Sure?</h1>
+      <h1 class="title">Delete
+        {{selectedTask.title}}:Are You Sure?</h1>
     </ion-header-bar>
     <ion-content>
-      <button class="button button-light" ng-click="closeModal()">
-        Cancel
-        <i class="icon ion-close-circled"></i>
-      </button>
-      <button class="button button-assertive" ng-click="delete()">
-        <i class="icon ion-close-circled"></i>
-      </button>
+      <div class="row">
+        <div class="col">
+          <button class="button button-block button-positive" ng-click="closeModal()">
+            Cancel
+            <i class="icon ion-close-circled"></i>
+          </button>
+        </div>
+        <div class="col">
+          <button class="button button-block button-assertive" ng-click="delete()">
+            Delete
+            <i class="icon ion-trash-b"></i>
+          </button>
+        </div>
+      </div>
+
     </ion-content>
   </ion-modal-view>
 </script>
