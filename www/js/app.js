@@ -6,30 +6,52 @@
 
 var db = null;
 
-angular.module('doli', ['ionic', 'ngCordova','doli.services'])
+angular.module('doli', ['ionic', 'ngCordova', 'doli.services'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
-    .state('task', {
+    .state('app', {
+      url: '/app',
+      abstract: true,
+      templateUrl: 'views/menu/menu.view.html',
+      controller: 'MenuController'
+    })
+    .state('app.task', {
       url: '/task',
-      controller: 'TaskListController',
-      templateUrl: 'views/task/task-list.view.html'
-    }).state('task-view', {
+      views: {
+        'menuContent': {
+          controller: 'TaskListController',
+          templateUrl: 'views/task/task-list.view.html'
+        }
+      }
+    }).state('app.task-view', {
       url: '/task/:taskId',
-      controller: 'TaskViewController',
-      templateUrl: 'views/task/task-view.view.html'
-    }).state('task-add', {
+      views: {
+        'menuContent': {
+          controller: 'TaskViewController',
+          templateUrl: 'views/task/task-view.view.html'
+        }
+      }
+    }).state('app.task-add', {
       url: '/task-add',
-      controller: 'TaskAddController',
-      templateUrl: 'views/task/task-add.view.html'
-    }).state('task-edit', {
+      views: {
+        'menuContent': {
+          controller: 'TaskAddController',
+          templateUrl: 'views/task/task-add.view.html'
+        }
+      }
+    }).state('app.task-edit', {
       url: '/task-edit/:taskId',
-      controller: 'TaskEditController',
-      templateUrl: 'views/task/task-edit.view.html'
+      views: {
+        'menuContent': {
+          controller: 'TaskEditController',
+          templateUrl: 'views/task/task-edit.view.html'
+        }
+      }
     });
 
-  $urlRouterProvider.otherwise('/task');
+  $urlRouterProvider.otherwise('/app/task');
 
 })
 
@@ -42,14 +64,14 @@ angular.module('doli', ['ionic', 'ngCordova','doli.services'])
       StatusBar.styleDefault();
     }
 
-    if (window.cordova) {
-      db = $cordovaSQLite.openDB("doli.db");
-    } else {
-      // Ionic serve syntax
-      db = window.openDatabase("myapp.db", "1.0", "My app", -1);
-    }
+    if(window.cordova) {
+  db = $cordovaSQLite.openDB("doli.db");
+} else {
+  // Ionic serve syntax
+  db = window.openDatabase("myapp.db", "1.0", "My app", -1);
+}
 
-    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS tasks (id integer primary key, title text)");
+$cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS tasks (id integer primary key, title text)");
 
   });
 })

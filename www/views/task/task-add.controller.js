@@ -5,7 +5,7 @@ angular.module('doli')
 
     $scope.create = function() {
       Task.add($scope.task);
-      $state.transitionTo('task');
+      $state.go('app.task');
     }
 
     $scope.$on('$ionicView.enter', function() {

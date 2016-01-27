@@ -5,7 +5,7 @@ angular.module('doli')
 
     $scope.edit = function() {
       Task.update($scope.task, $scope.task);
-      $state.transitionTo('task');
+      $state.transitionTo('app.task');
     }
 
     $scope.$on('$ionicView.beforeEnter', function() {

@@ -41,7 +41,7 @@ angular.module('doli')
           // console.log('BUTTON CLICKED '+index, index);
           if (index === 0) {
 
-            $state.transitionTo('task-edit', {
+            $state.transitionTo('app.task-edit', {
               taskId: task.id
             });
 
