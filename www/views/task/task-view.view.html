@@ -1,12 +1,8 @@
-<ion-view hide-back-button="true" view-title="DOLI">
+<ion-view hide-back-button="false" view-title="DOLI - Task View">
   <ion-nav-buttons side="right">
     <button class="button icon ion-plus-circled"></button>
   </ion-nav-buttons>
   <ion-content>
-    <ul class="list">
-      <li class="item" ng-repeat="task in tasks">
-        {{task.title}}
-      </li>
-    </ul>
+    {{task.title}}
   </ion-content>
 </ion-view>

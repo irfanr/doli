@@ -1,5 +1,5 @@
 angular.module('doli')
-  .controller('TaskListController', function($scope, $ionicPlatform, $cordovaSQLite, Task, $ionicModal) {
+  .controller('TaskListController', function($scope, $state, $ionicPlatform, $cordovaSQLite, Task, $ionicModal) {
 
     $scope.selectedTask = {};
 
@@ -30,6 +30,12 @@ angular.module('doli')
     }, {
       title: 'Task 3'
     }];
+
+    $scope.onTap = function(task){
+
+      $state.transitionTo('');
+
+    }
 
     $scope.insert = function(title) {
       var query = "INSERT INTO tasks (title) VALUES (?)";
