@@ -8,4 +8,12 @@ angular.module('doli')
       $state.transitionTo('task');
     }
 
+    $scope.$on('$ionicView.enter', function() {
+
+      document.getElementById("title").focus();
+      cordova.plugins.Keyboard.show();
+
+    });
+
+
   });

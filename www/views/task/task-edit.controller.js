@@ -16,4 +16,11 @@ angular.module('doli')
 
     });
 
+    $scope.$on('$ionicView.enter', function() {
+
+      document.getElementById("title").focus();
+      cordova.plugins.Keyboard.show();
+
+    });
+
   });
