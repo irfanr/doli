@@ -70,7 +70,7 @@ angular.module('doli.services', [])
   }
 
   self.update = function(oldTask, newTask) {
-    var parameters = [newTask.name, oldTask.id];
+    var parameters = [newTask.title, oldTask.id];
     return DBA.query("UPDATE tasks SET title = (?) WHERE id = (?)", parameters);
   }
 

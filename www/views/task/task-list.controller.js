@@ -39,6 +39,13 @@ angular.module('doli')
         },
         buttonClicked: function(index) {
           // console.log('BUTTON CLICKED '+index, index);
+          if (index === 0) {
+
+            $state.transitionTo('task-edit', {
+              taskId: task.id
+            });
+
+          }
           return true;
         },
         destructiveButtonClicked: function() {

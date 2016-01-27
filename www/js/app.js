@@ -23,6 +23,10 @@ angular.module('doli', ['ionic', 'ngCordova','doli.services'])
       url: '/task-add',
       controller: 'TaskAddController',
       templateUrl: 'views/task/task-add.view.html'
+    }).state('task-edit', {
+      url: '/task-edit/:taskId',
+      controller: 'TaskEditController',
+      templateUrl: 'views/task/task-edit.view.html'
     });
 
   $urlRouterProvider.otherwise('/task');
