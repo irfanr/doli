@@ -16,7 +16,7 @@ angular.module('doli', ['ionic', 'ngCordova','doli.services'])
       controller: 'TaskListController',
       templateUrl: 'views/task/task-list.view.html'
     }).state('task-view', {
-      url: '/task-view/:taskId',
+      url: '/task/:taskId',
       controller: 'TaskViewController',
       templateUrl: 'views/task/task-view.view.html'
     }).state('task-add', {

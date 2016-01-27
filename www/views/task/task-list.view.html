@@ -6,14 +6,8 @@
 
     <div class="list">
 
-      <div class="item item-button-right" ng-repeat="task in tasks">
-        <!-- <button class="button button-light" ui-sref="task-view({taskId: task.id})">
-          <i class="icon ion-eye"></i>
-        </button> -->
+      <div class="item item-button-right" ng-repeat="task in tasks" ui-sref="task-view({taskId:task.id})">
         {{task.title}}
-        <button class="button button-assertive" ng-click="confirmDelete(task)">
-          <i class="icon ion-close-circled"></i>
-        </button>
       </div>
 
     </div>
