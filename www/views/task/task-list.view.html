@@ -18,10 +18,22 @@
 <script id="task-delete-confirm.html" type="text/ng-template">
   <ion-modal-view>
     <ion-header-bar>
-      <h1 class="title">Delete
-        {{selectedTask.title}}:Are You Sure?</h1>
+
+      <h1 class="title">
+        Delete Task</h1>
+
     </ion-header-bar>
     <ion-content>
+      <div class="row">
+        <div class="col">
+          {{selectedTask.title}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Delete this?
+        </div>
+      </div>
       <div class="row">
         <div class="col">
           <button class="button button-block button-positive" ng-click="closeModal()">
