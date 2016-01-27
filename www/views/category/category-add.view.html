@@ -1,0 +1,14 @@
+<ion-view hide-back-button="false" view-title="DOLI - Add Category">
+  <ion-content>
+    <form ng-submit="create()">
+      <div class="list">
+        <label class="item item-input">
+          <input autofocus id="name" name="name" ng-model="category.name" placeholder="Name" type="text">
+        </label>
+      </div>
+      <div class="padding">
+        <button class="button button-block button-positive" type="submit">Create</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

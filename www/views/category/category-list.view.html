@@ -1,0 +1,54 @@
+<ion-view hide-back-button="true" view-title="DOLI - Category List">
+  <ion-nav-buttons side="right">
+    <button class="button button-balanced icon ion-plus-circled" ui-sref="app.category-add"></button>
+  </ion-nav-buttons>
+  <ion-content>
+
+    <div class="list">
+
+      <div class="item item-button-right" ng-repeat="category in categories" on-hold="onHold(category)" ui-sref="app.category-view({categoryId:category.id})">
+        {{category.name}}
+      </div>
+
+    </div>
+
+  </ion-content>
+</ion-view>
+
+<script id="category-delete-confirm.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+
+      <h1 class="title">
+        Delete Category</h1>
+
+    </ion-header-bar>
+    <ion-content>
+      <div class="row">
+        <div class="col">
+          {{selectedCategory.name}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Delete this?
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="button button-block button-positive" ng-click="closeModal()">
+            Cancel
+            <i class="icon ion-close-circled"></i>
+          </button>
+        </div>
+        <div class="col">
+          <button class="button button-block button-assertive" ng-click="delete()">
+            Delete
+            <i class="icon ion-trash-b"></i>
+          </button>
+        </div>
+      </div>
+
+    </ion-content>
+  </ion-modal-view>
+</script>

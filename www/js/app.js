@@ -17,6 +17,39 @@ angular.module('doli', ['ionic', 'ngCordova', 'doli.services'])
       templateUrl: 'views/menu/menu.view.html',
       controller: 'MenuController'
     })
+    .state('app.category', {
+      url: '/category',
+      views: {
+        'menuContent': {
+          controller: 'CategoryListController',
+          templateUrl: 'views/category/category-list.view.html'
+        }
+      }
+    }).state('app.category-view', {
+      url: '/category/:categoryId',
+      views: {
+        'menuContent': {
+          controller: 'CategoryViewController',
+          templateUrl: 'views/category/category-view.view.html'
+        }
+      }
+    }).state('app.category-add', {
+      url: '/category-add',
+      views: {
+        'menuContent': {
+          controller: 'CategoryAddController',
+          templateUrl: 'views/category/category-add.view.html'
+        }
+      }
+    }).state('app.category-edit', {
+      url: '/category-edit/:categoryId',
+      views: {
+        'menuContent': {
+          controller: 'CategoryEditController',
+          templateUrl: 'views/category/category-edit.view.html'
+        }
+      }
+    })
     .state('app.task', {
       url: '/task',
       views: {
@@ -64,14 +97,15 @@ angular.module('doli', ['ionic', 'ngCordova', 'doli.services'])
       StatusBar.styleDefault();
     }
 
-    if(window.cordova) {
-  db = $cordovaSQLite.openDB("doli.db");
-} else {
-  // Ionic serve syntax
-  db = window.openDatabase("myapp.db", "1.0", "My app", -1);
-}
+    if (window.cordova) {
+      db = $cordovaSQLite.openDB("doli.db");
+    } else {
+      // Ionic serve syntax
+      db = window.openDatabase("myapp.db", "1.0", "My app", -1);
+    }
 
-$cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS tasks (id integer primary key, title text)");
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS tasks (id integer primary key, title text)");
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS categories (id integer primary key, name text)");
 
   });
 })
