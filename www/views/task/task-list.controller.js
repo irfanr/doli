@@ -74,15 +74,6 @@ angular.module('doli')
 
     }
 
-    $scope.insertDummy = function() {
-
-      $scope.insert('Task A');
-      $scope.insert('Task B');
-      $scope.insert('Task C');
-
-      $scope.selectAll();
-    }
-
     $scope.confirmDelete = function(task) {
       $scope.selectedTask = task;
       $scope.openModal();

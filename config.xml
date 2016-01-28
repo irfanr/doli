@@ -43,4 +43,5 @@
   <feature name="Keyboard">
     <param name="android-package" onload="true" value="IonicKeyboard"/>
   </feature>
+  <allow-navigation href="http://*/*"/>
 </widget>
