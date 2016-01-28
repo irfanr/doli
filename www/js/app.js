@@ -99,18 +99,39 @@ angular.module('doli', ['ionic', 'ngCordova', 'doli.services'])
 
     if (window.cordova) {
 
-      // REMOVE THIS in production!!!
-      $cordovaSQLite.deleteDB("doli.db");
+      window.plugins.sqlDB.remove("doli.db", 0, function() {
+
+        window.plugins.sqlDB.copy("doli.db", 0, function() {
+          db = $cordovaSQLite.openDB("doli.db");
+        }, function(error) {
+          console.error("There was an error copying the database: " + JSON.stringify(error));
+          db = $cordovaSQLite.openDB("doli.db");
+        });
+
+      },
+      function(error) {
+        console.error("There was an error removing the database: " + JSON.stringify(error));
+
+      });
 
 
-      db = $cordovaSQLite.openDB("doli.db");
-    } else {
-      // Ionic serve syntax
-      db = window.openDatabase("myapp.db", "1.0", "My app", -1);
+
+      //
+      //   // REMOVE THIS in production!!!
+      //   $cordovaSQLite.deleteDB("doli.db");
+      //
+      //
+      //   db = $cordovaSQLite.openDB("doli.db");
+      // } else {
+      //   // Ionic serve syntax
+      //   db = window.openDatabase("myapp.db", "1.0", "My app", -1);
+      //
+      // $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS tasks (id integer primary key, title text)");
+      // $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS categories (id integer primary key, code text, color text, icon text, name text)");
+
     }
 
-    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS tasks (id integer primary key, title text)");
-    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS categories (id integer primary key, code text, color text, icon text, name text)");
+
 
   });
 })
