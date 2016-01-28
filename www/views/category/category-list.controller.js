@@ -91,6 +91,8 @@ angular.module('doli')
         $scope.categories = categories;
       });
 
+      console.log(JSON.stringify($scope.categories));
+
       // $scope.selectAll();
 
     });
@@ -99,6 +101,9 @@ angular.module('doli')
 
       Category.all().then(function(categories) {
         $scope.categories = categories;
+
+        console.log(JSON.stringify($scope.categories));
+
       });
 
     });

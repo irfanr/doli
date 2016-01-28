@@ -81,33 +81,33 @@ angular.module('doli.services', [])
   var self = this;
 
   self.all = function() {
-    return DBA.query("SELECT id, name FROM categories")
+    return DBA.query("SELECT id, code, color, icon, name FROM categories")
       .then(function(result) {
         return DBA.getAll(result);
       });
   }
 
-  self.get = function(taskId) {
-    var parameters = [taskId];
-    return DBA.query("SELECT id, name FROM categories WHERE id = (?)", parameters)
+  self.get = function(categoryId) {
+    var parameters = [categoryId];
+    return DBA.query("SELECT id, code, color, icon, name FROM categories WHERE id = (?)", parameters)
       .then(function(result) {
         return DBA.getById(result);
       });
   }
 
-  self.add = function(task) {
-    var parameters = [task.name];
-    return DBA.query("INSERT INTO categories (name) VALUES (?)", parameters);
+  self.add = function(category) {
+    var parameters = [category.code, category.color, category.icon, category.name];
+    return DBA.query("INSERT INTO categories (code, color, icon, name) VALUES (?,?,?,?)", parameters);
   }
 
-  self.remove = function(task) {
-    var parameters = [task.id];
+  self.remove = function(category) {
+    var parameters = [category.id];
     return DBA.query("DELETE FROM categories WHERE id = (?)", parameters);
   }
 
-  self.update = function(oldTask, newTask) {
-    var parameters = [newTask.name, oldTask.id];
-    return DBA.query("UPDATE categories SET name = (?) WHERE id = (?)", parameters);
+  self.update = function(oldCategory, newCategory) {
+    var parameters = [newCategory.code, newCategory.color, newCategory.icon, newCategory.name, oldCategory.id];
+    return DBA.query("UPDATE categories SET code = (?),color = (?),icon = (?), name = (?) WHERE id = (?)", parameters);
   }
 
   return self;
