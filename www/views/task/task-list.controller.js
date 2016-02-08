@@ -87,19 +87,29 @@ angular.module('doli')
 
     $ionicPlatform.ready(function() {
 
-      Task.all().then(function(tasks) {
-        $scope.tasks = tasks;
-      });
+      console.log('Task Load All in $ionicPlatform.ready');
 
-      // $scope.selectAll();
+      $scope.selectAll();      
 
     });
 
     $scope.$on('$ionicView.beforeEnter', function() {
 
-      Task.all().then(function(tasks) {
-        $scope.tasks = tasks;
-      });
+      console.log('Task Load All in $ionicView.beforeEnter');
+
+      $scope.selectAll();
+
+    });
+
+    $scope.$on('$ionicView.enter', function() {
+
+      console.log('Task Load All in $ionicView.enter');
+
+      if ($scope.tasks.length != 0) {
+
+        $scope.selectAll();
+
+      }
 
     });
 

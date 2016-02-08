@@ -116,18 +116,6 @@ angular.module('doli', ['ionic', 'ngCordova', 'doli.services'])
 
 
 
-      //
-      //   // REMOVE THIS in production!!!
-      //   $cordovaSQLite.deleteDB("doli.db");
-      //
-      //
-      //   db = $cordovaSQLite.openDB("doli.db");
-      // } else {
-      //   // Ionic serve syntax
-      //   db = window.openDatabase("myapp.db", "1.0", "My app", -1);
-      //
-      // $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS tasks (id integer primary key, title text)");
-      // $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS categories (id integer primary key, code text, color text, icon text, name text)");
 
     }
 

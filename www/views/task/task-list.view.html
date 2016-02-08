@@ -1,6 +1,7 @@
 <ion-view hide-back-button="true" view-title="Task List">
-  
+
   <ion-nav-buttons side="right">
+    <button class="button button-positive icon ion-refresh" ng-click="selectAll()"></button>
     <button class="button button-balanced icon ion-plus-circled" ui-sref="app.task-add"></button>
   </ion-nav-buttons>
   <ion-content>
