@@ -14,7 +14,7 @@ angular.module('doli.services', [])
           q.resolve(result);
         }, function(error) {
           console.warn('I found an error');
-          console.warn(error);
+          console.warn(JSON.stringify(error));
           q.reject(error);
         });
     });
@@ -45,7 +45,7 @@ angular.module('doli.services', [])
   var self = this;
 
   self.all = function() {
-    return DBA.query("SELECT id, title FROM tasks")
+    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.icon as category_icon, c.color as category_color FROM tasks t, categories c WHERE t.category_id = c.id")
       .then(function(result) {
         return DBA.getAll(result);
       });
@@ -53,7 +53,7 @@ angular.module('doli.services', [])
 
   self.get = function(taskId) {
     var parameters = [taskId];
-    return DBA.query("SELECT id, title FROM tasks WHERE id = (?)", parameters)
+    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.name as category_name FROM tasks t, categories c WHERE t.category_id = c.id AND t.id = (?)", parameters)
       .then(function(result) {
         return DBA.getById(result);
       });

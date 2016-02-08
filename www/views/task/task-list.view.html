@@ -7,7 +7,8 @@
   <ion-content>
 
     <div class="list">
-      <div class="item item-button-right" ng-repeat="task in tasks" on-hold="onHold(task)" ui-sref="app.task-view({taskId:task.id})">
+      <div class="item item-icon-left" ng-repeat="task in tasks" on-hold="onHold(task)" ui-sref="app.task-view({taskId:task.id})">
+        <i class="icon {{task.category_icon}}" style="color : #{{task.category_color}}"></i>
         {{task.title}}
       </div>
 
