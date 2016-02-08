@@ -60,8 +60,8 @@ angular.module('doli.services', [])
   }
 
   self.add = function(task) {
-    var parameters = [task.title];
-    return DBA.query("INSERT INTO tasks (title) VALUES (?)", parameters);
+    var parameters = [task.title, task.category_id];
+    return DBA.query("INSERT INTO tasks (title, category_id) VALUES (?,?)", parameters);
   }
 
   self.remove = function(task) {
