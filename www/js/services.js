@@ -53,7 +53,7 @@ angular.module('doli.services', [])
 
   self.get = function(taskId) {
     var parameters = [taskId];
-    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.name as category_name FROM tasks t, categories c WHERE t.category_id = c.id AND t.id = (?)", parameters)
+    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.name as category_name, c.icon as category_icon, c.color as category_color FROM tasks t, categories c WHERE t.category_id = c.id AND t.id = (?)", parameters)
       .then(function(result) {
         return DBA.getById(result);
       });
@@ -70,8 +70,8 @@ angular.module('doli.services', [])
   }
 
   self.update = function(oldTask, newTask) {
-    var parameters = [newTask.title, oldTask.id];
-    return DBA.query("UPDATE tasks SET title = (?) WHERE id = (?)", parameters);
+    var parameters = [newTask.title, newTask.category_id, oldTask.id];
+    return DBA.query("UPDATE tasks SET title = (?),category_id = (?) WHERE id = (?)", parameters);
   }
 
   return self;
