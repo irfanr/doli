@@ -1,0 +1,55 @@
+<ion-view hide-back-button="true" view-title="Priority List">
+  <ion-nav-buttons side="right">
+    <button class="button button-balanced icon ion-plus-circled" ui-sref="app.priority-add"></button>
+  </ion-nav-buttons>
+  <ion-content>
+
+    <div class="list">
+
+      <div class="item item-icon-left" ng-repeat="priority in categories" on-hold="onHold(priority)" ui-sref="app.priority-view({priorityId:priority.id})">
+        <i class="icon {{priority.icon}}" style="color : #{{priority.color}}"></i>
+        {{priority.code}}||{{priority.name}}
+      </div>
+
+    </div>
+
+  </ion-content>
+</ion-view>
+
+<script id="priority-delete-confirm.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+
+      <h1 class="title">
+        Delete Priority</h1>
+
+    </ion-header-bar>
+    <ion-content>
+      <div class="row">
+        <div class="col">
+          {{selectedPriority.name}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Delete this?
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="button button-block button-positive" ng-click="closeModal()">
+            Cancel
+            <i class="icon ion-close-circled"></i>
+          </button>
+        </div>
+        <div class="col">
+          <button class="button button-block button-assertive" ng-click="delete()">
+            Delete
+            <i class="icon ion-trash-b"></i>
+          </button>
+        </div>
+      </div>
+
+    </ion-content>
+  </ion-modal-view>
+</script>

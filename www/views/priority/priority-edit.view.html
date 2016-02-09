@@ -1,0 +1,23 @@
+<ion-view hide-back-button="false" view-title="Edit Priority">
+  <ion-content>
+    <form ng-submit="edit()">
+      <div class="list">
+        <label class="item item-input">
+          <input autofocus id="code" name="code" ng-model="priority.code" placeholder="Code" type="text">
+        </label>
+        <label class="item item-input">
+          <input autofocus id="color" name="color" ng-model="priority.color" placeholder="Color" type="text">
+        </label>
+        <label class="item item-input">
+          <input autofocus id="icon" name="icon" ng-model="priority.icon" placeholder="Icon" type="text">
+        </label>
+        <label class="item item-input">
+          <input autofocus id="name" name="name" ng-model="priority.name" placeholder="Name" type="text">
+        </label>
+      </div>
+      <div class="padding">
+        <button class="button button-block button-positive" type="submit">Edit</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>
