@@ -117,3 +117,39 @@ angular.module('doli.services', [])
 
   return self;
 })
+
+.factory('Priority', function($cordovaSQLite, DBA) {
+  var self = this;
+
+  self.all = function() {
+    return DBA.query("SELECT id, code, color, icon, name FROM priorities")
+      .then(function(result) {
+        return DBA.getAll(result);
+      });
+  }
+
+  self.get = function(priorityId) {
+    var parameters = [priorityId];
+    return DBA.query("SELECT id, code, color, icon, name FROM priorities WHERE id = (?)", parameters)
+      .then(function(result) {
+        return DBA.getById(result);
+      });
+  }
+
+  self.add = function(priority) {
+    var parameters = [priority.code, priority.color, priority.icon, priority.name];
+    return DBA.query("INSERT INTO priorities (code, color, icon, name) VALUES (?,?,?,?)", parameters);
+  }
+
+  self.remove = function(priority) {
+    var parameters = [priority.id];
+    return DBA.query("DELETE FROM priorities WHERE id = (?)", parameters);
+  }
+
+  self.update = function(oldPriority, newPriority) {
+    var parameters = [newPriority.code, newPriority.color, newPriority.icon, newPriority.name, oldPriority.id];
+    return DBA.query("UPDATE priorities SET code = (?),color = (?),icon = (?), name = (?) WHERE id = (?)", parameters);
+  }
+
+  return self;
+})

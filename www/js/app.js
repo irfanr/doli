@@ -52,6 +52,39 @@ angular.module('doli', ['ionic', 'ngCordova', 'doli.services'])
         }
       }
     })
+    .state('app.priority', {
+      url: '/priority',
+      views: {
+        'menuContent': {
+          controller: 'PriorityListController',
+          templateUrl: 'views/priority/priority-list.view.html'
+        }
+      }
+    }).state('app.priority-view', {
+      url: '/priority/:priorityId',
+      views: {
+        'menuContent': {
+          controller: 'PriorityViewController',
+          templateUrl: 'views/priority/priority-view.view.html'
+        }
+      }
+    }).state('app.priority-add', {
+      url: '/priority-add',
+      views: {
+        'menuContent': {
+          controller: 'PriorityAddController',
+          templateUrl: 'views/priority/priority-add.view.html'
+        }
+      }
+    }).state('app.priority-edit', {
+      url: '/priority-edit/:priorityId',
+      views: {
+        'menuContent': {
+          controller: 'PriorityEditCosntroller',
+          templateUrl: 'views/priority/priority-edit.view.html'
+        }
+      }
+    })
     .state('app.task', {
       url: '/task',
       views: {
