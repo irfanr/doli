@@ -7,9 +7,10 @@
   <ion-content>
 
     <div class="list">
-      <div class="item item-icon-left" ng-repeat="task in tasks" on-hold="onHold(task)" on-swipe-left="done(task)"  ui-sref="app.task-view({taskId:task.id})">
+      <div class="item item-icon-left item-icon-right" ng-repeat="task in tasks" on-hold="onHold(task)" on-swipe-left="done(task)"  ui-sref="app.task-view({taskId:task.id})">
         <i class="icon {{task.category_icon}}" style="color : #{{task.category_color}}"></i>
         {{task.title}}
+        <i class="icon {{task.priority_icon}}" style="color : #{{task.priority_color}}"></i>
       </div>
 
     </div>
