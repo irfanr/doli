@@ -85,11 +85,16 @@ angular.module('doli')
       $scope.closeModal();
     }
 
+    $scope.done = function(task) {
+      Task.done(task);
+      $scope.selectAll();
+    }
+
     $ionicPlatform.ready(function() {
 
       console.log('Task Load All in $ionicPlatform.ready');
 
-      $scope.selectAll();      
+      $scope.selectAll();
 
     });
 

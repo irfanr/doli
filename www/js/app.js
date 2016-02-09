@@ -5,6 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 
 var db = null;
+var MODE = "DEV";
+// var MODE = "PROD";
 
 angular.module('doli', ['ionic', 'ngCordova', 'doli.services'])
 
@@ -99,24 +101,24 @@ angular.module('doli', ['ionic', 'ngCordova', 'doli.services'])
 
     if (window.cordova) {
 
-      //DEV
-      window.plugins.sqlDB.remove("doli.db", 0, function() {
+      if (MODE == 'DEV') {
+        window.plugins.sqlDB.remove("doli.db", 0, function() {
 
-          window.plugins.sqlDB.copy("doli.db", 0, function() {
-            db = $cordovaSQLite.openDB("doli.db");
-          }, function(error) {
-            console.error("There was an error copying the database: " + JSON.stringify(error));
-            db = $cordovaSQLite.openDB("doli.db");
+            window.plugins.sqlDB.copy("doli.db", 0, function() {
+              db = $cordovaSQLite.openDB("doli.db");
+            }, function(error) {
+              console.error("There was an error copying the database: " + JSON.stringify(error));
+              db = $cordovaSQLite.openDB("doli.db");
+            });
+
+          },
+          function(error) {
+            console.error("There was an error removing the database: " + JSON.stringify(error));
+
           });
-
-        },
-        function(error) {
-          console.error("There was an error removing the database: " + JSON.stringify(error));
-
-        });
-
-      // // PROD
-      // db = $cordovaSQLite.openDB("doli.db");
+      } else if (MODE == 'PROD') {
+        db = $cordovaSQLite.openDB("doli.db");
+      }
 
 
     }

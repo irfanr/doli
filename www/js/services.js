@@ -45,7 +45,7 @@ angular.module('doli.services', [])
   var self = this;
 
   self.all = function() {
-    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.icon as category_icon, c.color as category_color FROM tasks t, categories c WHERE t.category_id = c.id")
+    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.icon as category_icon, c.color as category_color FROM tasks t, categories c WHERE t.status = 1 AND t.category_id = c.id")
       .then(function(result) {
         return DBA.getAll(result);
       });
@@ -61,7 +61,7 @@ angular.module('doli.services', [])
 
   self.add = function(task) {
     var parameters = [task.title, task.category_id];
-    return DBA.query("INSERT INTO tasks (title, category_id) VALUES (?,?)", parameters);
+    return DBA.query("INSERT INTO tasks (title, category_id, status) VALUES (?,?,1)", parameters);
   }
 
   self.remove = function(task) {
@@ -72,6 +72,11 @@ angular.module('doli.services', [])
   self.update = function(oldTask, newTask) {
     var parameters = [newTask.title, newTask.category_id, oldTask.id];
     return DBA.query("UPDATE tasks SET title = (?),category_id = (?) WHERE id = (?)", parameters);
+  }
+
+  self.done = function(oldTask) {
+    var parameters = [oldTask.id];
+    return DBA.query("UPDATE tasks SET status = 2 WHERE id = (?)", parameters);
   }
 
   return self;
