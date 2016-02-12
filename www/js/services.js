@@ -44,8 +44,9 @@ angular.module('doli.services', [])
 .factory('Task', function($cordovaSQLite, DBA) {
   var self = this;
 
-  self.all = function() {
-    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.icon as category_icon, c.color as category_color,p.id as priority_id, p.name as priority_name, p.icon as priority_icon, p.color as priority_color FROM tasks t, categories c, priorities p WHERE t.status = 1 AND t.category_id = c.id AND t.priority_id = p.id ORDER BY t.priority_id ASC")
+  self.all = function(status) {
+    var parameters = [status];
+    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.icon as category_icon, c.color as category_color,p.id as priority_id, p.name as priority_name, p.icon as priority_icon, p.color as priority_color FROM tasks t, categories c, priorities p WHERE t.status = ? AND t.category_id = c.id AND t.priority_id = p.id ORDER BY t.priority_id ASC",parameters)
       .then(function(result) {
         return DBA.getAll(result);
       });
@@ -77,6 +78,11 @@ angular.module('doli.services', [])
   self.done = function(oldTask) {
     var parameters = [oldTask.id];
     return DBA.query("UPDATE tasks SET status = 2 WHERE id = (?)", parameters);
+  }
+
+  self.undone = function(oldTask) {
+    var parameters = [oldTask.id];
+    return DBA.query("UPDATE tasks SET status = 1 WHERE id = (?)", parameters);
   }
 
   return self;

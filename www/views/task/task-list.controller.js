@@ -68,8 +68,12 @@ angular.module('doli')
 
     $scope.selectAll = function() {
 
-      Task.all().then(function(tasks) {
+      Task.all(1).then(function(tasks) {
         $scope.tasks = tasks;
+      });
+
+      Task.all(2).then(function(tasksDone) {
+        $scope.tasksDone = tasksDone;
       });
 
     }
@@ -89,6 +93,12 @@ angular.module('doli')
       Task.done(task);
       $scope.selectAll();
     }
+
+    $scope.undone = function(task) {
+      Task.undone(task);
+      $scope.selectAll();
+    }
+
 
     $ionicPlatform.ready(function() {
 

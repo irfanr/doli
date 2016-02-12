@@ -5,8 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 
 var db = null;
-var MODE = "DEV";
-// var MODE = "PROD";
+// var MODE = "DEV";
+var MODE = "PROD";
 
 angular.module('doli', ['ionic', 'ngCordova', 'doli.services'])
 
