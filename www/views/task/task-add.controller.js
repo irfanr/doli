@@ -16,7 +16,7 @@ angular.module('doli')
         $scope.task.priority_id = 4;
       }
 
-      console.log('create task: ' + JSON.stringify($scope.task));
+      // console.log('create task: ' + JSON.stringify($scope.task));
 
       Task.add($scope.task);
       $state.go('app.task');
@@ -24,7 +24,7 @@ angular.module('doli')
 
     $scope.submitWithCategory = function(category) {
 
-      console.log("submitWithCategory");
+      // console.log("submitWithCategory");
 
       $scope.task.category_id = category.id;
 
@@ -40,7 +40,7 @@ angular.module('doli')
 
       Priority.all().then(function(priorities) {
         $scope.priorities = priorities;
-        console.log('priorities: ' + JSON.stringify($scope.priorities));
+        // console.log('priorities: ' + JSON.stringify($scope.priorities));
       });
 
       document.getElementById("title").focus();
