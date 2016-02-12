@@ -61,7 +61,7 @@ angular.module('doli.services', [])
 
   self.add = function(task) {
     var parameters = [task.title, task.category_id, task.priority_id];
-    return DBA.query("INSERT INTO tasks (title, category_id, status, priority_id) VALUES (?,?,?,1)", parameters);
+    return DBA.query("INSERT INTO tasks (title, category_id, priority_id, status) VALUES (?,?,?,1)", parameters);
   }
 
   self.remove = function(task) {
