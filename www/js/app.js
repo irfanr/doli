@@ -117,6 +117,14 @@ angular.module('doli', ['ionic', 'ngCordova', 'doli.services'])
           templateUrl: 'views/task/task-edit.view.html'
         }
       }
+    }).state('app.option', {
+      url: '/option',
+      views: {
+        'menuContent': {
+          controller: 'OptionListController',
+          templateUrl: 'views/option/option-list.view.html'
+        }
+      }
     });
 
   $urlRouterProvider.otherwise('/app/task');

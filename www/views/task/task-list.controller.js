@@ -1,7 +1,11 @@
 angular.module('doli')
-  .controller('TaskListController', function($scope, $state, $ionicPlatform, $cordovaSQLite, Task, $ionicModal, $ionicActionSheet) {
+  .controller('TaskListController', function($scope, $rootScope, $state, $ionicPlatform, $cordovaSQLite, Task, $ionicModal, $ionicActionSheet) {
 
     $scope.selectedTask = {};
+
+    $rootScope.options = {
+      doneTaskVisible: true
+    };
 
     $ionicModal.fromTemplateUrl('task-delete-confirm.html', {
       scope: $scope,
@@ -66,15 +70,19 @@ angular.module('doli')
       });
     }
 
-    $scope.selectAll = function() {
+    $scope.selectAll = function(doneTaskVisible) {
 
       Task.all(1).then(function(tasks) {
         $scope.tasks = tasks;
       });
 
-      Task.all(2).then(function(tasksDone) {
-        $scope.tasksDone = tasksDone;
-      });
+      if ($rootScope.options.doneTaskVisible) {
+        Task.all(2).then(function(tasksDone) {
+          $scope.tasksDone = tasksDone;
+        });
+      } else {
+        $scope.tasksDone = [];
+      }
 
     }
 
@@ -125,6 +133,15 @@ angular.module('doli')
         $scope.selectAll();
 
       }
+
+    });
+
+    $scope.$on('doneTaskVisibleChanged', function(event, args) {
+
+      console.log('on doneTaskVisibleChanged');
+
+      $scope.selectAll();
+
 
     });
 
