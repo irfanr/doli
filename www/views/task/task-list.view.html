@@ -12,7 +12,7 @@
         {{task.title}}
         <i class="icon {{task.priority_icon}}" style="color : #{{task.priority_color}}"></i>
       </div>
-      <div class="item item-icon-left item-icon-right" ng-repeat="task in tasksDone" on-hold="onHold(task)" on-swipe-left="undone(task)" style="text-decoration: line-through;" ui-sref="app.task-view({taskId:task.id})">
+      <div class="item item-icon-left item-icon-right item-done" ng-repeat="task in tasksDone" on-hold="onHold(task)" on-swipe-left="undone(task)" ui-sref="app.task-view({taskId:task.id})">
         <i class="icon {{task.category_icon}}" style="color : #{{task.category_color}}"></i>
         <span>{{task.title}}</span>
         <i class="icon {{task.priority_icon}}" style="color : #{{task.priority_color}}"></i>
