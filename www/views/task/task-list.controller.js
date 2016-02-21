@@ -4,7 +4,8 @@ angular.module('doli')
     $scope.selectedTask = {};
 
     $rootScope.options = {
-      doneTaskVisible: true
+      doneTaskVisible: false,
+      selectedCategory: 'ALL'
     };
 
     $ionicModal.fromTemplateUrl('task-delete-confirm.html', {
@@ -70,18 +71,38 @@ angular.module('doli')
       });
     }
 
-    $scope.selectAll = function(doneTaskVisible) {
+    $scope.selectAll = function() {
 
-      Task.all(1).then(function(tasks) {
-        $scope.tasks = tasks;
-      });
+      if ($rootScope.options.selectedCategory == 'ALL') {
 
-      if ($rootScope.options.doneTaskVisible) {
-        Task.all(2).then(function(tasksDone) {
-          $scope.tasksDone = tasksDone;
+        Task.all(1).then(function(tasks) {
+          $scope.tasks = tasks;
         });
+
+        if ($rootScope.options.doneTaskVisible) {
+          Task.all(2).then(function(tasksDone) {
+            $scope.tasksDone = tasksDone;
+          });
+        } else {
+          $scope.tasksDone = [];
+        }
+
       } else {
-        $scope.tasksDone = [];
+
+        var categoryId = $rootScope.options.selectedCategory * 1;
+
+        Task.findByCategory(1, categoryId).then(function(tasks) {
+          $scope.tasks = tasks;
+        });
+
+        if ($rootScope.options.doneTaskVisible) {
+          Task.findByCategory(2, categoryId).then(function(tasksDone) {
+            $scope.tasksDone = tasksDone;
+          });
+        } else {
+          $scope.tasksDone = [];
+        }
+
       }
 
     }

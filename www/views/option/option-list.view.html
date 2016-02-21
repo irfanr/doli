@@ -2,6 +2,15 @@
   <ion-content>
     <ion-list>
       <ion-toggle ng-model="options.doneTaskVisible" ng-change="doneTaskVisibleChanged()" toggle-class="toggle-calm">Done Task Visibility</ion-toggle>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          View Category
+        </div>
+        <select  ng-model="options.selectedCategory" ng-change="selectedCategoryChanged()">
+          <option value="ALL">ALL</option>
+          <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+        </select>
+      </label>
     </ion-list>
   </ion-content>
 </ion-view>
