@@ -1,5 +1,5 @@
 angular.module('doli')
-  .controller('TaskListController', function($scope, $rootScope, $state, $ionicPlatform, $cordovaSQLite, Task, $ionicModal, $ionicActionSheet) {
+  .controller('TaskListController', function($scope, $rootScope, $state, $ionicPlatform, $cordovaSQLite, Task, $ionicModal, $ionicActionSheet, Category) {
 
     $scope.selectedTask = {};
 
@@ -107,6 +107,14 @@ angular.module('doli')
 
     }
 
+    $scope.selectCategory = function(selectedCategory){
+
+      $rootScope.options.selectedCategory = selectedCategory;
+
+      $scope.selectAll();
+
+    }
+
     $scope.confirmDelete = function(task) {
       $scope.selectedTask = task;
       $scope.openModal();
@@ -164,6 +172,10 @@ angular.module('doli')
       $scope.selectAll();
 
 
+    });
+
+    Category.all().then(function(categories) {
+      $scope.categories = categories;
     });
 
   });
