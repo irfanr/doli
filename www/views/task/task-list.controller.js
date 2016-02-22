@@ -118,12 +118,12 @@ angular.module('doli')
       $scope.closeModal();
     }
 
-    $scope.done = function(task) {
+    $scope.done = function(index, task) {
       Task.done(task);
       $scope.selectAll();
     }
 
-    $scope.undone = function(task) {
+    $scope.undone = function(index, task) {
       Task.undone(task);
       $scope.selectAll();
     }

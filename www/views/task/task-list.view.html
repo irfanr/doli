@@ -6,18 +6,24 @@
   </ion-nav-buttons>
   <ion-content>
 
-    <div class="list">
-      <div class="item item-icon-left item-icon-right" ng-repeat="task in tasks" on-hold="onHold(task)" on-swipe-left="done(task)" ui-sref="app.task-view({taskId:task.id})">
+    <ion-list can-swipe="true">
+      <ion-item class="item item-icon-left item-icon-right" ng-repeat="task in tasks" on-hold="onHold(task)">
         <i class="icon {{task.category_icon}}" style="color : #{{task.category_color}}"></i>
         {{task.title}}
         <i class="icon {{task.priority_icon}}" style="color : #{{task.priority_color}}"></i>
-      </div>
-      <div class="item item-icon-left item-icon-right item-done" ng-repeat="task in tasksDone" on-hold="onHold(task)" on-swipe-left="undone(task)" ui-sref="app.task-view({taskId:task.id})">
+        <ion-option-button class="button-assertive" ng-click="done($index, task)">
+          Done
+        </ion-option-button>
+      </ion-item>
+      <ion-item class="item item-icon-left item-icon-right item-done" ng-repeat="task in tasksDone" on-hold="onHold(task)">
         <i class="icon {{task.category_icon}}" style="color : #{{task.category_color}}"></i>
         <span>{{task.title}}</span>
         <i class="icon {{task.priority_icon}}" style="color : #{{task.priority_color}}"></i>
-      </div>
-    </div>
+        <ion-option-button class="button-assertive" ng-click="undone($index, task)">
+          Done
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
 
   </ion-content>
 </ion-view>
