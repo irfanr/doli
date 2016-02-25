@@ -93,6 +93,12 @@ angular.module('doli.services', [])
     return DBA.query("UPDATE tasks SET status = 1 WHERE id = (?)", parameters);
   }
 
+  self.changePriority = function(oldTask) {
+    var parameters = [oldTask.priority_id, oldTask.id];
+    return DBA.query("UPDATE tasks SET priority_id = (?) WHERE id = (?)", parameters);
+  }
+
+
   return self;
 })
 

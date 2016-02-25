@@ -107,7 +107,7 @@ angular.module('doli')
 
     }
 
-    $scope.selectCategory = function(selectedCategory){
+    $scope.selectCategory = function(selectedCategory) {
 
       $rootScope.options.selectedCategory = selectedCategory;
 
@@ -126,16 +126,37 @@ angular.module('doli')
       $scope.closeModal();
     }
 
-    $scope.done = function(index, task) {
+    $scope.done = function(task) {
       Task.done(task);
       $scope.selectAll();
     }
 
-    $scope.undone = function(index, task) {
+    $scope.undone = function(task) {
       Task.undone(task);
       $scope.selectAll();
     }
 
+    $scope.promote = function(task) {
+
+      console.log(JSON.stringify(task));
+
+      if (task.priority_id > 1) {
+        task.priority_id = task.priority_id - 1;
+        Task.changePriority(task);
+        $scope.selectAll();
+      }
+    }
+
+    $scope.demote = function(task) {
+
+      console.log(JSON.stringify(task));
+
+      if (task.priority_id < 4) {
+        task.priority_id = task.priority_id + 1;
+        Task.changePriority(task);
+        $scope.selectAll();
+      }
+    }
 
     $ionicPlatform.ready(function() {
 
