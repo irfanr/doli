@@ -26,7 +26,7 @@
       </ion-item>
       <ion-item class="item item-icon-left item-icon-right item-done" ng-repeat="task in tasksDone" on-hold="onHold(task)">
         <i class="icon {{task.category_icon}}" style="color : #{{task.category_color}}"></i>
-        <span>{{task.title}}</span>
+        <span style="text-decoration: line-through">{{task.title}}</span>
         <i class="icon {{task.priority_icon}}" style="color : #{{task.priority_color}}"></i>
         <ion-option-button class="button-assertive" ng-click="undone($index, task)">
           Done
