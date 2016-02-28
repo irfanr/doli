@@ -164,7 +164,40 @@ angular.module('doli', ['ionic', 'ngCordova', 'doli.services'])
 
     }
 
+    document.addEventListener('deviceready', function() {
+      console.log("deviceready");
+      // cordova.plugins.backgroundMode is now available
 
+      // Android customization
+      cordova.plugins.backgroundMode.setDefaults({
+        title: "Doli",
+        text: "Berjalan di Background"
+      });
+      // Enable background mode
+      cordova.plugins.backgroundMode.enable();
+
+      console.log("cordova.plugins.backgroundMode.isActive(): " + cordova.plugins.backgroundMode.isActive())
+
+      // Called when background mode has been activated
+      cordova.plugins.backgroundMode.onactivate = function() {
+
+        console.log("onactivate");
+
+        // $interval(function() {
+        //   console.log("background ping: " + new Date());
+        // }, 1000);
+
+      };
+
+      cordova.plugins.backgroundMode.ondeactivate = function() {
+        console.log("ondeactivate");
+      };
+
+      cordova.plugins.backgroundMode.onfailure = function(errorCode) {
+        console.log("onfailure");
+      };
+
+    }, false);
 
   });
 })
