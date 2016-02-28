@@ -131,7 +131,7 @@ angular.module('doli', ['ionic', 'ngCordova', 'doli.services'])
 
 })
 
-.run(function($ionicPlatform, $cordovaSQLite) {
+.run(function($ionicPlatform, $cordovaSQLite, $ionicPopup) {
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -198,6 +198,20 @@ angular.module('doli', ['ionic', 'ngCordova', 'doli.services'])
       };
 
     }, false);
+
+    // Disable BACK button on home
+    $ionicPlatform.registerBackButtonAction(function(event) {
+      if (true) { // your check here
+        $ionicPopup.confirm({
+          title: 'Peringatan',
+          template: 'Anda yakin ingin menutup aplikasi?'
+        }).then(function(res) {
+          if (res) {
+            ionic.Platform.exitApp();
+          }
+        })
+      }
+    }, 100);
 
   });
 })
