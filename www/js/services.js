@@ -46,7 +46,7 @@ angular.module('doli.services', [])
 
   self.all = function(status) {
     var parameters = [status];
-    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.icon as category_icon, c.color as category_color,p.id as priority_id, p.name as priority_name, p.icon as priority_icon, p.color as priority_color FROM tasks t, categories c, priorities p WHERE t.status = ? AND t.category_id = c.id AND t.priority_id = p.id ORDER BY t.priority_id ASC",parameters)
+    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.icon as category_icon, c.color as category_color,p.id as priority_id, p.name as priority_name, p.icon as priority_icon, p.color as priority_color, t.reminder FROM tasks t, categories c, priorities p WHERE t.status = ? AND t.category_id = c.id AND t.priority_id = p.id ORDER BY t.priority_id ASC",parameters)
       .then(function(result) {
         return DBA.getAll(result);
       });
@@ -54,7 +54,7 @@ angular.module('doli.services', [])
 
   self.findByCategory = function(status, categoryId) {
     var parameters = [status, categoryId];
-    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.icon as category_icon, c.color as category_color,p.id as priority_id, p.name as priority_name, p.icon as priority_icon, p.color as priority_color FROM tasks t, categories c, priorities p WHERE t.status = ? AND  t.category_id = ? AND t.category_id = c.id AND t.priority_id = p.id ORDER BY t.priority_id ASC",parameters)
+    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.icon as category_icon, c.color as category_color,p.id as priority_id, p.name as priority_name, p.icon as priority_icon, p.color as priority_color,t.reminder FROM tasks t, categories c, priorities p WHERE t.status = ? AND  t.category_id = ? AND t.category_id = c.id AND t.priority_id = p.id ORDER BY t.priority_id ASC",parameters)
       .then(function(result) {
         return DBA.getAll(result);
       });
@@ -62,15 +62,15 @@ angular.module('doli.services', [])
 
   self.get = function(taskId) {
     var parameters = [taskId];
-    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.name as category_name, c.icon as category_icon, c.color as category_color,p.id as priority_id, p.name as priority_name, p.icon as priority_icon, p.color as priority_color FROM tasks t, categories c, priorities p WHERE t.category_id = c.id AND t.priority_id = p.id AND t.id = (?)", parameters)
+    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.name as category_name, c.icon as category_icon, c.color as category_color,p.id as priority_id, p.name as priority_name, p.icon as priority_icon, p.color as priority_color,t.reminder FROM tasks t, categories c, priorities p WHERE t.category_id = c.id AND t.priority_id = p.id AND t.id = (?)", parameters)
       .then(function(result) {
         return DBA.getById(result);
       });
   }
 
   self.add = function(task) {
-    var parameters = [task.title, task.category_id, task.priority_id];
-    return DBA.query("INSERT INTO tasks (title, category_id, priority_id, status) VALUES (?,?,?,1)", parameters);
+    var parameters = [task.title, task.category_id, task.priority_id, task.reminder];
+    return DBA.query("INSERT INTO tasks (title, category_id, priority_id, status, reminder) VALUES (?,?,?,1,?)", parameters);
   }
 
   self.remove = function(task) {
@@ -79,8 +79,8 @@ angular.module('doli.services', [])
   }
 
   self.update = function(oldTask, newTask) {
-    var parameters = [newTask.title, newTask.category_id, newTask.priority_id, oldTask.id];
-    return DBA.query("UPDATE tasks SET title = (?),category_id = (?),priority_id = (?) WHERE id = (?)", parameters);
+    var parameters = [newTask.title, newTask.category_id, newTask.priority_id, newTask.reminder, oldTask.id];
+    return DBA.query("UPDATE tasks SET title = (?),category_id = (?),priority_id = (?), reminder = (?) WHERE id = (?)", parameters);
   }
 
   self.done = function(oldTask) {

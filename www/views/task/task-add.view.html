@@ -14,6 +14,18 @@
           <i class="icon {{category.icon}}" style="color : #{{category.color}}"></i>
         </a>
       </div>
+      <ion-list>
+        <ion-toggle ng-change="enableReminderChanged()" ng-model="enableReminder">
+          Enable Reminder
+        </ion-toggle>
+      </ion-list>
+      <div class="list" ng-show="enableReminder == true">
+        <div class="item item-icon-left" ion-datetime-picker monday-first ng-model="task.reminder">
+          <i class="icon ion-ios-browsers-outline positive"></i>
+          Reminder:
+          <strong>{{task.reminder| date: "yyyy-MM-dd H:mm"}}</strong>
+        </div>
+      </div>
       <div class="padding">
         <button class="button button-block button-positive" type="submit">Create</button>
       </div>

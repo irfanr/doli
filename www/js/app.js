@@ -8,7 +8,7 @@ var db = null;
 // var MODE = "DEV";
 var MODE = "PROD";
 
-angular.module('doli', ['ionic', 'ngCordova', 'doli.services'])
+angular.module('doli', ['ionic', 'ngCordova', 'ion-datetime-picker', 'doli.services'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 

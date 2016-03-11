@@ -19,6 +19,9 @@
       <ion-item class="item item-icon-left item-icon-right" ng-repeat="task in tasks" on-hold="onHold(task)">
         <i class="icon {{task.category_icon}}" style="color : #{{task.category_color}}"></i>
         {{task.title}}
+        <div>
+          <h5>{{task.reminder| date: "yyyy-MM-dd H:mm"}}</h5>
+        </div>
         <i class="icon {{task.priority_icon}}" style="color : #{{task.priority_color}}"></i>
         <ion-option-button class="button-balanced" ng-click="promote(task)">
           Promote

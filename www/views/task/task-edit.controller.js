@@ -4,6 +4,8 @@ angular.module('doli')
     $scope.task = {};
     $scope.task.category_id = 1;
     $scope.task.priority_id = 4;
+    $scope.enableReminder = false;
+    $scope.task.reminder = new Date();
     $scope.categories = [];
     $scope.priorities = [];
 
@@ -14,6 +16,18 @@ angular.module('doli')
       }
       if (typeof $scope.task.priority_id === "undefined") {
         $scope.task.priority_id = 4;
+      }
+
+      if ($scope.enableReminder) {
+
+        console.log('before converted: ' + JSON.stringify($scope.task));
+        $scope.task.reminder = new Date($scope.task.reminder).toISOString();
+        console.log('convert reminder');
+        console.log('edit task: ' + JSON.stringify($scope.task));
+      } else {
+
+        $scope.task.reminder = null;
+
       }
 
       Task.update($scope.task, $scope.task);
@@ -30,10 +44,24 @@ angular.module('doli')
 
     }
 
+    $scope.enableReminderChanged = function() {
+      if ($scope.enableReminder == false) {
+        $scope.enableReminder = true;
+      } else {
+        $scope.enableReminder = false;
+      }
+    }
+
     $scope.$on('$ionicView.beforeEnter', function() {
 
       Task.get($stateParams.taskId).then(function(task) {
         $scope.task = task;
+
+        if ($scope.task.reminder != null) {
+          $scope.enableReminder = true;
+        } else {
+          $scope.enableReminder = false;
+        }
       });
 
     });

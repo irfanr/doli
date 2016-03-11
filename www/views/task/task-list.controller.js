@@ -77,6 +77,11 @@ angular.module('doli')
 
         Task.all(1).then(function(tasks) {
           $scope.tasks = tasks;
+
+          angular.forEach($scope.tasks, function(task) {
+            // console.log(JSON.stringify(task));
+          });
+
         });
 
         if ($rootScope.options.doneTaskVisible) {
