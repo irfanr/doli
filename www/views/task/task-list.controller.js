@@ -81,15 +81,15 @@ angular.module('doli')
           angular.forEach($scope.tasks, function(task) {
             // console.log(JSON.stringify(task));
 
-            if (task.reminder != null) {
-
-              Notification.add({
-                id: task.id,
-                message: task.title,
-                at: new Date(task.reminder)
-              });
-
-            }
+            // if (task.reminder != null) {
+          //
+          //   Notification.add({
+          //     id: task.id,
+          //     message: task.title,
+          //     at: new Date(task.reminder)
+          //   });
+          //
+          // }
 
           });
 

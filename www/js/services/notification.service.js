@@ -1,5 +1,5 @@
 angular.module('doli')
-  .factory('Notification', function($ionicPlatform, $cordovaLocalNotification, $cordovaVibration) {
+  .factory('Notification', function($ionicPlatform, $cordovaLocalNotification, $cordovaVibration, Task) {
 
     var self = this;
 
@@ -27,7 +27,24 @@ angular.module('doli')
     $ionicPlatform.ready(function() {
 
       // Start when application first starts
+      Task.all(1).then(function(tasks) {
 
+        angular.forEach(tasks, function(task) {
+          // console.log(JSON.stringify(task));
+
+          if (task.reminder != null) {
+
+            self.add({
+              id: task.id,
+              message: task.title,
+              at: new Date(task.reminder)
+            });
+
+          }
+
+        });
+
+      });
 
     });
 
