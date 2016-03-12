@@ -46,7 +46,7 @@ angular.module('doli.services', [])
 
   self.all = function(status) {
     var parameters = [status];
-    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.icon as category_icon, c.color as category_color,p.id as priority_id, p.name as priority_name, p.icon as priority_icon, p.color as priority_color, t.reminder FROM tasks t, categories c, priorities p WHERE t.status = ? AND t.category_id = c.id AND t.priority_id = p.id ORDER BY t.priority_id ASC",parameters)
+    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.icon as category_icon, c.color as category_color,p.id as priority_id, p.name as priority_name, p.icon as priority_icon, p.color as priority_color, t.reminder FROM tasks t, categories c, priorities p WHERE t.status = ? AND t.category_id = c.id AND t.priority_id = p.id ORDER BY t.priority_id ASC", parameters)
       .then(function(result) {
         return DBA.getAll(result);
       });
@@ -54,7 +54,14 @@ angular.module('doli.services', [])
 
   self.findByCategory = function(status, categoryId) {
     var parameters = [status, categoryId];
-    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.icon as category_icon, c.color as category_color,p.id as priority_id, p.name as priority_name, p.icon as priority_icon, p.color as priority_color,t.reminder FROM tasks t, categories c, priorities p WHERE t.status = ? AND  t.category_id = ? AND t.category_id = c.id AND t.priority_id = p.id ORDER BY t.priority_id ASC",parameters)
+    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.icon as category_icon, c.color as category_color,p.id as priority_id, p.name as priority_name, p.icon as priority_icon, p.color as priority_color,t.reminder FROM tasks t, categories c, priorities p WHERE t.status = ? AND  t.category_id = ? AND t.category_id = c.id AND t.priority_id = p.id ORDER BY t.priority_id ASC", parameters)
+      .then(function(result) {
+        return DBA.getAll(result);
+      });
+  }
+
+  self.findByReminderIsNotNull = function() {
+    return DBA.query("SELECT t.id, t.title, c.id as category_id, c.icon as category_icon, c.color as category_color,p.id as priority_id, p.name as priority_name, p.icon as priority_icon, p.color as priority_color,t.reminder FROM tasks t, categories c, priorities p WHERE t.status = 1 AND t.reminder != 'null' AND t.category_id = ? AND t.category_id = c.id AND t.priority_id = p.id")
       .then(function(result) {
         return DBA.getAll(result);
       });
@@ -96,6 +103,10 @@ angular.module('doli.services', [])
   self.changePriority = function(oldTask) {
     var parameters = [oldTask.priority_id, oldTask.id];
     return DBA.query("UPDATE tasks SET priority_id = (?) WHERE id = (?)", parameters);
+  }
+
+  self.selectLastInsertRowId = function() {
+    return DBA.query("SELECT last_insert_rowid()");
   }
 
 

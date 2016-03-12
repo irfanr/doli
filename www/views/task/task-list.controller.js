@@ -1,5 +1,5 @@
 angular.module('doli')
-  .controller('TaskListController', function($scope, $rootScope, $state, $ionicPlatform, $cordovaSQLite, Task, $ionicModal, $ionicActionSheet, Category) {
+  .controller('TaskListController', function($scope, $rootScope, $state, $ionicPlatform, $cordovaSQLite, Task, $ionicModal, $ionicActionSheet, Category, $cordovaLocalNotification, Notification) {
 
     $scope.selectedTask = {};
 
@@ -80,6 +80,17 @@ angular.module('doli')
 
           angular.forEach($scope.tasks, function(task) {
             // console.log(JSON.stringify(task));
+
+            if (task.reminder != null) {
+
+              Notification.add({
+                id: task.id,
+                message: task.title,
+                at: new Date(task.reminder)
+              });
+
+            }
+
           });
 
         });
@@ -161,6 +172,30 @@ angular.module('doli')
         Task.changePriority(task);
         $scope.selectAll();
       }
+    }
+
+    $scope.test = function() {
+
+      var now = new Date();
+
+      var notification = {
+        id: 1,
+        message: "Test 1",
+        at: new Date()
+      };
+
+      Notification.add(notification);
+
+      // now.setSeconds(now.getSeconds() + 10);
+
+      var notification = {
+        id: 2,
+        message: "Test 2",
+        at: new Date()
+      };
+
+      Notification.add(notification);
+
     }
 
     $ionicPlatform.ready(function() {

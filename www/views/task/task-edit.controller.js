@@ -1,5 +1,5 @@
 angular.module('doli')
-  .controller('TaskEditController', function($scope, $state, $stateParams, $ionicPlatform, Task, Category, Priority) {
+  .controller('TaskEditController', function($scope, $state, $stateParams, $ionicPlatform, Task, Category, Priority, Notification) {
 
     $scope.task = {};
     $scope.task.category_id = 1;
@@ -30,7 +30,21 @@ angular.module('doli')
 
       }
 
-      Task.update($scope.task, $scope.task);
+      Task.update($scope.task, $scope.task).then(function(result) {
+
+        if ($scope.enableReminder === true) {
+
+          Notification.add({
+            id: $scope.task.id,
+            message: $scope.task.title,
+            at: new Date($scope.task.reminder)
+          });
+
+        }
+
+        console.log("insertId: " + result.insertId);
+        return result;
+      });;
       $state.transitionTo('app.task');
     }
 
